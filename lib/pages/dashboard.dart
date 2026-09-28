@@ -59,9 +59,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Color(0xFFC9A227),
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(28),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue[900]!, Colors.blue[900]!],
+                  colors: [Color(0xFFC9A227), Color(0xFFC9A227)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -206,14 +206,14 @@ class _HomePageState extends State<HomePage> {
                                     size: 18,
                                   ),
                                   SizedBox(width: 6),
-                                  Text(
-                                    '+ 5 cette semaine',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 10,
-                                    ),
-                                  ),
+                                  // Text(
+                                  //   '+ 5 cette semaine',
+                                  //   style: TextStyle(
+                                  //     color: Colors.white,
+                                  //     fontWeight: FontWeight.w600,
+                                  //     fontSize: 10,
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -252,37 +252,33 @@ class _HomePageState extends State<HomePage> {
               crossAxisSpacing: 16,
               childAspectRatio: 1.3,
               children: [
-                _buildCategoryCard(
-                  'Téléphones',
-                  'Vendus',
-                  '${_dashboardData?['sommes_produit_categorie1'] ?? '0'}',
-                  '${_dashboardData?['sommes_produit_categorie1'] ?? '0'} produits',
-                  Icons.phone_android,
-                  Colors.blue,
+                _buildStatCard(
+                  'Ventes du jour',
+                  '${_dashboardData?['ventes_jour'] ?? '0'}',
+                  Icons.today,
+                  Color(0xFFC9A227),
+                  'ventes',
                 ),
-                _buildCategoryCard(
-                  'Chaussures',
-                  'Vendus',
-                  '${_dashboardData?['sommes_produit_categorie2'] ?? '0'}',
-                  '${_dashboardData?['sommes_produit_categorie2'] ?? '0'} produits',
-                  Icons.sports,
-                  Colors.green,
+                _buildStatCard(
+                  'Revenu du jour',
+                  '${_dashboardData?['revenu_jour'] ?? '0'} $deviseSymbole',
+                  Icons.attach_money,
+                  Color(0xFFC9A227),
+                  'revenu',
                 ),
-                _buildCategoryCard(
-                  'Accessoires',
-                  'Vendus',
-                  '${_dashboardData?['sommes_produit_categorie3'] ?? '0'}',
-                  '${_dashboardData?['sommes_produit_categorie3'] ?? '0'} produits',
-                  Icons.headphones,
-                  Colors.orange,
+                _buildStatCard(
+                  'Stock total',
+                  '${_dashboardData?['stock_total'] ?? '0'}',
+                  Icons.inventory_2,
+                  Color(0xFFC9A227),
+                  'articles',
                 ),
-                _buildCategoryCard(
-                  'Somme',
-                  'Toutes ventes',
-                  '${_dashboardData?['sommes_produits'] ?? '0'}',
-                  '${_dashboardData?['sommes_produits'] ?? '0'} produits',
-                  Icons.category,
-                  Colors.purple,
+                _buildStatCard(
+                  'Depense',
+                  '${_dashboardData?['clients_total'] ?? '0'}',
+                  Icons.money_off_csred_sharp,
+                  Color(0xFFC9A227),
+                  'Depenses',
                 ),
               ],
             ),
@@ -315,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // Table Header
                   Container(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
                       borderRadius: BorderRadius.only(
@@ -326,9 +322,19 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: Text(
                             'Client',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Chaussure',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
@@ -381,104 +387,96 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildCategoryCard(
+  Widget _buildStatCard(
     String title,
-    String label,
-    String sales,
-    String amount,
+    String value,
     IconData icon,
     Color color,
+    String unit,
   ) {
     return Container(
-      padding: EdgeInsets.all(14),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.blue.shade600, Colors.blue.shade900],
+          colors: [color, color.withValues(alpha: 0.8)],
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
+            color: color.withValues(alpha: 0.3),
+            blurRadius: 15,
+            offset: Offset(0, 8),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(icon, color: Colors.white, size: 32),
+                child: Icon(icon, color: Colors.white, size: 28),
               ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.trending_up, color: Colors.white, size: 14),
+                    SizedBox(width: 4),
+                    Text(
+                      '+12%',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 18),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     Text(
-          //       label,
-          //       style: TextStyle(
-          //         fontSize: 12,
-          //         color: Colors.white.withValues(alpha: 0.7),
-          //       ),
-          //     ),
-          //     // Text(
-          //     //   'Montant',
-          //     //   style: TextStyle(
-          //     //     fontSize: 12,
-          //     //     color: Colors.white.withValues(alpha: 0.7),
-          //     //     fontWeight: FontWeight.w500,
-          //     //   ),
-          //     // ),
-          //   ],
-          // ),
-          SizedBox(height: 8),
+          SizedBox(height: 16),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.white.withValues(alpha: 0.8),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 4),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Row(
-                children: [
-                  Text(
-                    sales,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    "Pièce",
-                    style: TextStyle(fontSize: 6, color: Colors.white),
-                  ),
-                ],
-              ),
-
               Text(
-                label,
+                value,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                ),
+              ),
+              SizedBox(width: 4),
+              Text(
+                unit,
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white.withValues(alpha: 0.7),
                 ),
               ),
             ],

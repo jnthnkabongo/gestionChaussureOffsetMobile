@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_api/pages/chaussures.dart';
+import 'package:frontend_api/pages/dashboard.dart';
+import 'package:frontend_api/pages/depenses.dart';
+import 'package:frontend_api/pages/parametres.dart';
+import 'package:frontend_api/pages/ventes.dart';
 
 class HomeWithBottomNav extends StatefulWidget {
   const HomeWithBottomNav({super.key});
@@ -11,7 +16,11 @@ class _HomeWithBottomNavState extends State<HomeWithBottomNav> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-  
+    HomePage(),
+    ChaussuresPage(),
+    VentesPage(),
+    DepensesPage(),
+    ParametresPage(),
   ];
 
   @override
@@ -53,7 +62,7 @@ class _HomeWithBottomNavState extends State<HomeWithBottomNav> {
                 _buildNavItem(
                   icon: Icons.shopping_bag_outlined,
                   selectedIcon: Icons.shopping_bag,
-                  label: 'Produits',
+                  label: 'Chaussures',
                   index: 1,
                 ),
                 _buildNavItem(
@@ -63,9 +72,9 @@ class _HomeWithBottomNavState extends State<HomeWithBottomNav> {
                   index: 2,
                 ),
                 _buildNavItem(
-                  icon: Icons.compare_arrows_outlined,
-                  selectedIcon: Icons.compare_arrows,
-                  label: 'Remises',
+                  icon: Icons.monetization_on_rounded,
+                  selectedIcon: Icons.monetization_on_rounded,
+                  label: 'Dépenses',
                   index: 3,
                 ),
                 _buildNavItem(
