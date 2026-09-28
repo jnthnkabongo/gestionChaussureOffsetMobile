@@ -390,7 +390,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
   }
 
   void _showVenteBottomSheet(Map<String, dynamic> chaussure) {
-    final _clientController = TextEditingController();
+    final _telephoneController = TextEditingController();
     final _quantiteController = TextEditingController();
     String? _selectedVarianteId;
 
@@ -474,11 +474,12 @@ class _ChaussuresPage extends State<ChaussuresPage> {
 
                   // Client
                   TextField(
-                    controller: _clientController,
+                    controller: _telephoneController,
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      labelText: 'Nom du client',
-                      hintText: 'Entrez le nom du client',
-                      prefixIcon: Icon(Icons.person, color: Color(0xFFC9A227)),
+                      labelText: 'Numéro de téléphone',
+                      hintText: 'Entrez le numéro du client',
+                      prefixIcon: Icon(Icons.phone, color: Color(0xFFC9A227)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -619,7 +620,8 @@ class _ChaussuresPage extends State<ChaussuresPage> {
                       onPressed: _selectedVarianteId != null
                           ? () async {
                               // Implémenter la logique de vente
-                              final clientNom = _clientController.text.trim();
+                              final clientTelephone = _telephoneController.text
+                                  .trim();
                               final quantite =
                                   int.tryParse(_quantiteController.text) ?? 0;
 
@@ -681,14 +683,15 @@ class _ChaussuresPage extends State<ChaussuresPage> {
 
                               try {
                                 print(
-                                  'Données de vente: client=$clientNom, variante=$_selectedVarianteId, quantite=$quantite, prix=$prixUnitaire, total=$total',
+                                  'Données de vente: client=$clientTelephone, variante=$_selectedVarianteId, quantite=$quantite, prix=$prixUnitaire, total=$total',
                                 );
 
                                 final result =
                                     await ApiService.enregistrerVente({
-                                      'client_nom': clientNom.isEmpty
+                                      'client_telephone':
+                                          clientTelephone.isEmpty
                                           ? null
-                                          : clientNom,
+                                          : clientTelephone,
                                       'variante_id': _selectedVarianteId,
                                       'quantite': quantite,
                                       'prix_unitaire': prixUnitaire,

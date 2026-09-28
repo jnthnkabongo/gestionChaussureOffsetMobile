@@ -321,18 +321,18 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Row(
                       children: [
+                        // Expanded(
+                        //   flex: 1,
+                        //   child: Text(
+                        //     'Client',
+                        //     style: TextStyle(
+                        //       fontWeight: FontWeight.bold,
+                        //       color: Colors.black87,
+                        //     ),
+                        //   ),
+                        // ),
                         Expanded(
-                          flex: 1,
-                          child: Text(
-                            'Client',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Text(
                             'Chaussure',
                             style: TextStyle(
@@ -369,12 +369,36 @@ class _HomePageState extends State<HomePage> {
                   ...(_dashboardData?['liste_ventes'] as List<dynamic>? ?? [])
                       .take(5)
                       .map((vente) {
-                        final client = vente['client'] ?? {};
-                        final deviseId = vente['devise_id'] ?? 1;
-                        final deviseSymbole = deviseId == 1 ? '\$' : 'FC';
+                        final details =
+                            vente['details'] as List<dynamic>? ?? [];
+                        final devise = vente['devise'] ?? {};
+                        final deviseSymbole = devise['symbole'] ?? '\$';
+
+                        // Extraire le nom de la chaussure depuis les détails
+                        String chaussureNom = 'Inconnu';
+                        if (details.isNotEmpty) {
+                          final firstDetail = details[0];
+                          final variante = firstDetail['variante'] ?? {};
+                          final chaussure = variante['chaussure'] ?? {};
+                          chaussureNom = chaussure['nom'] ?? 'Inconnu';
+                        }
+
+                        // Utiliser la date formatée du backend ou créer une nouvelle
+                        String dateFormatee = vente['date_vente'] ?? '';
+                        if (dateFormatee.isEmpty &&
+                            vente['created_at'] != null) {
+                          try {
+                            final date = DateTime.parse(vente['created_at']);
+                            dateFormatee =
+                                '${date.day}/${date.month}/${date.year}';
+                          } catch (e) {
+                            dateFormatee = 'Date inconnue';
+                          }
+                        }
+
                         return _buildTableRow(
-                          client['nom_client'] ?? 'Inconnu',
-                          vente['date_vente'] ?? '',
+                          chaussureNom,
+                          dateFormatee,
                           '${vente['total'] ?? '0'} $deviseSymbole',
                         );
                       }),

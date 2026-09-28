@@ -54,7 +54,8 @@ class _VentesPage extends State<VentesPage> {
     setState(() {
       _filteredVentes = _ventes.where((vente) {
         final numero = vente['numero_vente']?.toString().toLowerCase() ?? '';
-        final client = vente['client']?['nom']?.toString().toLowerCase() ?? '';
+        final client =
+            vente['client']?['telephone']?.toString().toLowerCase() ?? '';
         return numero.contains(query) || client.contains(query);
       }).toList();
     });
@@ -313,7 +314,7 @@ class _VentesPage extends State<VentesPage> {
             children: [
               SizedBox(height: 4),
               Text(
-                client['nom'] ?? 'Client anonyme',
+                client['telephone'] ?? 'Client anonyme',
                 style: TextStyle(fontSize: 14, color: Colors.grey[600]),
               ),
               SizedBox(height: 4),
