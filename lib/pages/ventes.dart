@@ -499,7 +499,7 @@ class _VentesPage extends State<VentesPage> {
                 ],
               ),
             );
-          }).toList(),
+          }),
       ],
     );
   }

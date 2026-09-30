@@ -162,7 +162,7 @@ class _DepensesPage extends State<DepensesPage> {
                 Expanded(
                   child: _buildStatCard(
                     'Total dépenses',
-                    '${_getTotalDepenses()}',
+                    _getTotalDepenses(),
                     Icons.account_balance_wallet,
                     Color(0xFFC9A227),
                   ),
@@ -171,7 +171,7 @@ class _DepensesPage extends State<DepensesPage> {
                 Expanded(
                   child: _buildStatCard(
                     'Ce mois',
-                    '${_getDepensesThisMonth()}',
+                    _getDepensesThisMonth(),
                     Icons.calendar_today,
                     Color(0xFF8F6B12),
                   ),
@@ -584,7 +584,7 @@ class _DepensesPage extends State<DepensesPage> {
                     ),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: deviseController.text.isEmpty
+                      initialValue: deviseController.text.isEmpty
                           ? null
                           : deviseController.text,
                       decoration: InputDecoration(
@@ -646,7 +646,7 @@ class _DepensesPage extends State<DepensesPage> {
                     ),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: categorieController.text.isEmpty
+                      initialValue: categorieController.text.isEmpty
                           ? null
                           : categorieController.text,
                       decoration: InputDecoration(
@@ -779,7 +779,7 @@ class _DepensesPage extends State<DepensesPage> {
                     ),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: statutController.text,
+                      initialValue: statutController.text,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -1015,7 +1015,7 @@ class _DepensesPage extends State<DepensesPage> {
                     ),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: deviseController.text.isEmpty
+                      initialValue: deviseController.text.isEmpty
                           ? null
                           : deviseController.text,
                       decoration: InputDecoration(
@@ -1077,7 +1077,7 @@ class _DepensesPage extends State<DepensesPage> {
                     ),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: categorieController.text.isEmpty
+                      initialValue: categorieController.text.isEmpty
                           ? null
                           : categorieController.text,
                       decoration: InputDecoration(
@@ -1210,7 +1210,7 @@ class _DepensesPage extends State<DepensesPage> {
                     ),
                     SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: statutController.text,
+                      initialValue: statutController.text,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),

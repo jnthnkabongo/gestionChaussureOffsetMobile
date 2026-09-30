@@ -390,9 +390,9 @@ class _ChaussuresPage extends State<ChaussuresPage> {
   }
 
   void _showVenteBottomSheet(Map<String, dynamic> chaussure) {
-    final _telephoneController = TextEditingController();
-    final _quantiteController = TextEditingController();
-    String? _selectedVarianteId;
+    final telephoneController = TextEditingController();
+    final quantiteController = TextEditingController();
+    String? selectedVarianteId;
 
     showModalBottomSheet(
       context: context,
@@ -474,7 +474,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
 
                   // Client
                   TextField(
-                    controller: _telephoneController,
+                    controller: telephoneController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       labelText: 'Numéro de téléphone',
@@ -515,7 +515,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
                     ) {
                       final stock = variante['stock'] ?? 0;
                       final isSelected =
-                          _selectedVarianteId == variante['id'].toString();
+                          selectedVarianteId == variante['id'].toString();
                       final isOutOfStock = stock <= 0;
 
                       return InkWell(
@@ -523,7 +523,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
                             ? null
                             : () {
                                 setModalState(() {
-                                  _selectedVarianteId = variante['id']
+                                  selectedVarianteId = variante['id']
                                       .toString();
                                 });
                               },
@@ -586,7 +586,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
 
                   // Quantité
                   TextField(
-                    controller: _quantiteController,
+                    controller: quantiteController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Quantité',
@@ -617,13 +617,13 @@ class _ChaussuresPage extends State<ChaussuresPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _selectedVarianteId != null
+                      onPressed: selectedVarianteId != null
                           ? () async {
                               // Implémenter la logique de vente
-                              final clientTelephone = _telephoneController.text
+                              final clientTelephone = telephoneController.text
                                   .trim();
                               final quantite =
-                                  int.tryParse(_quantiteController.text) ?? 0;
+                                  int.tryParse(quantiteController.text) ?? 0;
 
                               if (quantite <= 0) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -641,7 +641,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
                                       ?.firstWhere(
                                         (v) =>
                                             v['id'].toString() ==
-                                            _selectedVarianteId,
+                                            selectedVarianteId,
                                       );
 
                               if (variante == null) {
@@ -683,7 +683,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
 
                               try {
                                 print(
-                                  'Données de vente: client=$clientTelephone, variante=$_selectedVarianteId, quantite=$quantite, prix=$prixUnitaire, total=$total',
+                                  'Données de vente: client=$clientTelephone, variante=$selectedVarianteId, quantite=$quantite, prix=$prixUnitaire, total=$total',
                                 );
 
                                 final result =
@@ -692,7 +692,7 @@ class _ChaussuresPage extends State<ChaussuresPage> {
                                           clientTelephone.isEmpty
                                           ? null
                                           : clientTelephone,
-                                      'variante_id': _selectedVarianteId,
+                                      'variante_id': selectedVarianteId,
                                       'quantite': quantite,
                                       'prix_unitaire': prixUnitaire,
                                       'sous_total': sousTotal,

@@ -419,7 +419,7 @@ class _HomePageState extends State<HomePage> {
     String unit,
   ) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -443,15 +443,15 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(icon, color: Colors.white, size: 28),
+                child: Icon(icon, color: Colors.white, size: 24),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
@@ -459,8 +459,8 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.trending_up, color: Colors.white, size: 14),
-                    SizedBox(width: 4),
+                    Icon(Icons.trending_up, color: Colors.white, size: 12),
+                    SizedBox(width: 3),
                     Text(
                       '+12%',
                       style: TextStyle(
@@ -474,32 +474,32 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 12),
           Text(
             title,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 13,
               color: Colors.white.withValues(alpha: 0.8),
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 4),
+          SizedBox(height: 3),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 11,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(width: 4),
+              SizedBox(width: 3),
               Text(
                 unit,
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 11,
                   color: Colors.white.withValues(alpha: 0.7),
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
+// import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,18 +7,18 @@ class ApiService {
   //static String get baseUrl {
   //return 'https://rolsworldbusiness.alwaysdata.net/api';
 
-  // static const String baseUrl = 'https://rolsworldbusiness.alwaysdata.net/api';
+  static String baseUrl = 'https://kinstore.alwaysdata.net/api';
 
-  static String get baseUrl {
-    if (kIsWeb) {
-      return 'http://localhost:8000/api';
-    } else if (Platform.isAndroid) {
-      return 'http://10.0.2.2:8000/api';
-    } else if (Platform.isIOS) {
-      return 'http://localhost:8000/api';
-    }
-    return 'http://localhost:8000/api';
-  }
+  // static String get baseUrl {
+  //   if (kIsWeb) {
+  //     return 'http://localhost:8000/api';
+  //   } else if (Platform.isAndroid) {
+  //     return 'http://10.0.2.2:8000/api';
+  //   } else if (Platform.isIOS) {
+  //     return 'http://localhost:8000/api';
+  //   }
+  //   return 'http://localhost:8000/api';
+  // }
 
   static const String _tokenKey = 'auth_token';
   static const String _userKey = 'user';
